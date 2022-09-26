@@ -6,6 +6,8 @@ from flask_smorest import Api
 
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+import requests
+
 api = Api()
 env = DotEnv()
 
@@ -37,6 +39,18 @@ def create_app(object_name):
 
     api.register_blueprint(status_api)
     api.register_blueprint(model_api)
+
+    logger.info("Registering with MM Registry")
+
+    # Register adapter to MM Registry
+    registry_data = {"uri": "http://esdl-add-price-profile-adapter:9202", "used_workers": 0, "name": "ESDL_ETM",
+                     "owner": "localhost", "version": "1.0", "max_workers": 1}
+
+    try:
+        r = requests.post('http://mmvib-registry:9200/registry/', json=registry_data)
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        print(e.response.text)
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 
