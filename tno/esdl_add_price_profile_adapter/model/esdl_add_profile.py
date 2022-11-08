@@ -143,7 +143,7 @@ class ESDLAddProfile(Model):
 
         config: ESDLAddPriceProfileAdapterConfig = self.model_run_dict[model_run_id].config
 
-        input_csv_bytes = self.load_from_minio(config.input_csv_file_path)
+        input_csv_bytes = self.load_from_minio(config.base_path + config.input_csv_file_path)
         profile_array = ESDLAddProfile.process_csv_bytes(input_csv_bytes, config.replace_year)
 
         influxdb_profile = False
@@ -151,7 +151,7 @@ class ESDLAddProfile(Model):
             ESDLAddProfile.upload_profile(config.influxdb_config, profile_array)
             influxdb_profile = True
 
-        input_esdl_bytes = self.load_from_minio(config.input_esdl_file_path)
+        input_esdl_bytes = self.load_from_minio(config.base_path + config.input_esdl_file_path)
         input_esdl = input_esdl_bytes.decode('utf-8')
 
         esh = EnergySystemHandler()

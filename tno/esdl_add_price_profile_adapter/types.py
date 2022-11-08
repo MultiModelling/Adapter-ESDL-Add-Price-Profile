@@ -37,7 +37,8 @@ class ESDLAddPriceProfileAdapterConfig:
     output_file_path: Optional[str] = None
     replace_year: Optional[int] = None
     influxdb_config: Optional[InfluxDBConfig] = None
-
+    base_path: Optional[str] = None
+    
 
 @dataclass
 class ModelRun:
