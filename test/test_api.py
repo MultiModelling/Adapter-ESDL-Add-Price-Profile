@@ -22,9 +22,10 @@ else:
     exit(1)
 
 post_body = {
-    "input_esdl_file_path": "bedrijventerreinommoord/Scenario_1_II3050_Nationale_Sturing/Trial_1/MM_workflow_run_1/ESDL_add_price_profile_adapter/Hybrid HeatPump.esdl",
-    "input_csv_file_path": "bedrijventerreinommoord/Scenario_1_II3050_Nationale_Sturing/Trial_1/MM_workflow_run_1/ETM_price_profile_adapter/elektrictitetisprijs_profiel.csv",
-    "output_file_path": "bedrijventerreinommoord/Scenario_1_II3050_Nationale_Sturing/Trial_1/MM_workflow_run_1/ESDL_add_price_profile_adapter/HHP_profile.esdl"
+    "base_path": "bedrijventerreinommoord/Scenario_1_II3050_Nationale_Sturing/Trial_1/MM_workflow_run_1/",
+    "input_esdl_file_path": "ESDL_add_price_profile_adapter/Hybrid HeatPump.esdl",
+    "input_csv_file_path": "ETM_price_profile_adapter/elektrictitetisprijs_profiel.csv",
+    "output_file_path": "ESDL_add_price_profile_adapter/HHP_profile.esdl"
 }
 
 res = requests.post(api_endpoint + '/model/initialize/' + model_run_id, json=post_body)
