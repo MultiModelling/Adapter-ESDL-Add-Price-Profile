@@ -17,7 +17,7 @@ class EnvSettings:
 
     @staticmethod
     def flask_server_port() -> int:
-        return 9201
+        return os.getenv("FLASK_RUN_PORT", 9202)
 
     @staticmethod
     def is_production():
@@ -39,6 +39,10 @@ class EnvSettings:
     @staticmethod
     def minio_secret_key():
         return os.getenv("MINIO_SECRET_KEY", "")
+
+    @staticmethod
+    def registry_endpoint():
+        return os.getenv("REGISTRY_ENDPOINT", None)
 
 
 class Config(object):
